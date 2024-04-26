@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ProteiTest extends BaseTest {
-    private Logger logger = (Logger) LogManager.getLogger(ProteiTest.class);
+    private final Logger logger = (Logger) LogManager.getLogger();
 
-    @Test
-    public void testLoginHappyPath() {
+    @Test // Проверка авторизации с корректными данными
+    public void testLoginTruth() {
         boolean actualResult =
                 openURL()
                         .fillLoginEmailField(getLogin())
@@ -18,11 +18,11 @@ public class ProteiTest extends BaseTest {
                         .isInputSubmitButtonDisplayed();
 
         Assertions.assertTrue(actualResult);
-        logger.info("testLoginHappyPath successfully");
+        logger.info("testLoginTruth successfully, the second form has opened ");
     }
 
-    @Test
-    public void testLogInNegativeUpperCasePassword() {
+    @Test // Проверка авторизации, пароль в верхнем регистре
+    public void testLoginNegativeUpperCasePassword() {
         boolean actualResult =
                 openURL()
                         .fillLoginEmailField(getLogin())
@@ -31,11 +31,11 @@ public class ProteiTest extends BaseTest {
                         .isInputSubmitButtonDisplayed();
 
         Assertions.assertFalse(actualResult);
-        logger.info("LogInNegativeUpperCasePassword successfully");
+        logger.info("LogInNegativeUpperCasePassword successfully, wrong password ");
     }
 
-    @Test
-    public void verifyLogInErrorMessageWrongPassword() {
+    @Test // Проверка авторизации, пароль неверен
+    public void verifyLoginErrorMessageWrongPassword() {
         String actualErrorMessage =
                 openURL()
                         .logIn(getLogin(), "wrongPass")
@@ -43,22 +43,22 @@ public class ProteiTest extends BaseTest {
                         .getInvalidDataMessageText();
 
         Assertions.assertEquals(actualErrorMessage, "Неверный E-Mail или пароль");
-        logger.info("verifyLogInErrorMessageWrongPassword successfully");
+        logger.info("verifyLoginErrorMessageWrongPassword successfully, message done");
     }
 
-    @Test
-    public void verifyLogInErrorMessageNoData() {
+    @Test // Проверка авторизации, без ввода данных
+    public void verifyLoginErrorMessageNoData() {
         String actualErrorMessage =
                 openURL()
                         .clickLogInButton()
                         .getEmailFormatErrorText();
 
         Assertions.assertEquals(actualErrorMessage, "Неверный формат E-Mail");
-        logger.info("verifyLogInErrorMessageNoData successfully");
+        logger.info("verifyLoginErrorMessageNoData successfully, message done");
     }
 
 
-    @Test
+    @Test // Прогон теста от начала и до конца
     public void testFormE2EHappyPath() {
         openURL()
                 .logIn(getLogin(), getPassword())
@@ -73,10 +73,10 @@ public class ProteiTest extends BaseTest {
 
 
         Assertions.assertEquals(new MainPage(getDriver()).getSuccessMessageText(), "Данные добавлены.");
-        logger.info("testFormE2EHappyPath successfully");
+        logger.info("the test is passed completely");
     }
 
-    @Test
+    @Test // Проверка без ввода данных во второй форме
     public void verifyEmptyFormErrorMessage() {
         openURL()
                 .logIn(getLogin(), getPassword())
@@ -84,5 +84,6 @@ public class ProteiTest extends BaseTest {
 
         Assertions.assertEquals(new MainPage(getDriver()).getEmailFormatErrorText(), "Неверный формат E-Mail");
         logger.info("verifyEmptyFormErrorMessage successfully");
+
     }
 }
