@@ -40,14 +40,8 @@ public class MainPage extends BasePage {
     @FindBy(id = "dataCheck12")
     private WebElement checkBox12;
 
-    @FindBy(id = "dataSelect21")
-    private WebElement select21;
-
     @FindBy(id = "dataSelect22")
     private WebElement select22;
-
-    @FindBy(id = "dataSelect23")
-    private WebElement select23;
 
     @FindBy(xpath = "//div[@id='inputsPage']//button")
     private WebElement inputSubmitButton;
@@ -61,19 +55,16 @@ public class MainPage extends BasePage {
 
     public MainPage fillLoginEmailField(String value) {
         loginEmailField.sendKeys(value);
-
         return this;
     }
 
     public MainPage fillPasswordField(String value) {
         loginPasswordField.sendKeys(value);
-
         return this;
     }
 
     public MainPage clickLogInButton() {
         authSubmitButton.click();
-
         return this;
     }
 
@@ -81,17 +72,14 @@ public class MainPage extends BasePage {
         fillLoginEmailField(email)
                 .fillPasswordField(password)
                 .clickLogInButton();
-
         return this;
     }
 
     public String getInvalidDataMessageText() {
-
         return invalidDataErrorMessage.getText();
     }
 
     public String getEmailFormatErrorText() {
-
         return emailFormatErrorMessage.getText();
     }
 
@@ -102,59 +90,39 @@ public class MainPage extends BasePage {
 
     public MainPage fillNameField(String value) {
         nameField.sendKeys(value);
-
         return this;
     }
 
     public MainPage selectFromDropdown(String value) {
         new Select(select).selectByVisibleText(value);
-
         return this;
     }
 
     public MainPage clickCheckBox11() {
         checkBox11.click();
-
         return this;
     }
 
     public MainPage clickCheckBox12() {
         checkBox12.click();
-
-        return this;
-    }
-
-    public MainPage clickSelect21() {
-        select21.click();
-
         return this;
     }
 
     public MainPage clickSelect22() {
         select22.click();
-
-        return this;
-    }
-
-    public MainPage clickSelect23() {
-        select23.click();
-
         return this;
     }
 
     public MainPage clickInputSubmitButton() {
         inputSubmitButton.click();
-
         return this;
     }
 
     public boolean isInputSubmitButtonDisplayed() {
-
         return inputSubmitButton.isDisplayed();
     }
 
     public String getSuccessMessageText() {
-
         return successMessage.getText();
     }
 

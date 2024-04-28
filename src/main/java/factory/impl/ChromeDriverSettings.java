@@ -6,7 +6,7 @@ import org.openqa.selenium.remote.AbstractDriverOptions;
 
 public class ChromeDriverSettings implements IDriverSettings {
 
-    {
+    static {
         WebDriverManager.chromedriver().setup();
     }
 
